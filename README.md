@@ -10,13 +10,7 @@ https://firebase.google.com/docs/flutter/setup
 
 Add the Google Service plist and json file in IOS and android project respectively.
 
-### Step 2 : Add the dependencies
-```
-camera: 0.9.8
-civil_id_detector: 0.0.1
-```
-
-### Step 3 : Adding bits for android and IOS
+### Step 2 : Adding bits for android and IOS
 For IOS add this in info.plist file
 ```
 <key>NSCameraUsageDescription</key>
