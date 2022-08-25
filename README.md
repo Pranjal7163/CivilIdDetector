@@ -1,39 +1,68 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Civil ID Detector
+This library for flutter provides easy means to scan a kuwait civil id card.
+It uses OCR to acheive the same , OCR relies on goole ml kit
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+## Implementation
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+### Step 1 : Add Firebase to Flutter
+Go through the firebase offical website to add firebase to your project.
+https://firebase.google.com/docs/flutter/setup
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Add the Google Service plist and json file in IOS and android project respectively.
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+### Step 2 : Add the dependencies
+```
+camera: 0.9.8
+civil_id_detector: 0.0.1
 ```
 
-## Additional information
+### Step 3 : Adding bits for android and IOS
+For IOS add this in info.plist file
+```
+<key>NSCameraUsageDescription</key>
+<string>your usage description here</string>
+```
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+
+For android :
+Add the following in the manifest file
+```
+<uses-permission android:name="android.permission.CAMERA"/>
+```
+
+Add the following in the application tag of manifest file
+```
+<meta-data
+android:name="com.google.mlkit.vision.DEPENDENCIES"
+android:value="ica,ocr" />
+```
+
+
+### Step 4 : Code integration
+
+```
+CameraController? _camController;
+CivilIdDetector.detect(_camController!, (IDTYPE idType, CivilIdMrzModel? mrzModel) => {
+    handleResponse(idType, mrzModel)
+});
+```
+
+## Properties
+IDTYPE | String enum
+--- | ---
+Possible Values | CIVIL_ID_FRONT , CIVIL_ID_BACK
+
+## CivilIdMrzModel  : Class Object
+Attributes | Description
+--- | ---
+ID Type | Type of document , it returns ID for kuwait civil id
+Country | County of origin of the document scanned
+Gender | Gender of the document holder
+Nationality | Nationality of the document holder
+Name | Name of the document holder
+
+
+
+## License
+
+MIT

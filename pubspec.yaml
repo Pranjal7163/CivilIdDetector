@@ -1,6 +1,6 @@
 name: civil_id_detector
 description: Civil ID Detection Library
-version: 0.0.1
+version: 0.0.2
 homepage:
 
 environment:
